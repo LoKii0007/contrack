@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useCreateCustomer, useUpdateCustomer } from "@/react-queries/userQueries";
+import { useCreateCustomer, useUpdateCustomer } from "@/components/react-queries/userQueries";
 import {
   Dialog,
   DialogContent,

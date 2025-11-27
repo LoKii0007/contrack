@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import UserFilters from "@/components/users/UserFilters";
-import UserTable from "@/components/users/UserTable";
-import UserFormModal from "@/components/users/UserFormModal";
-import DeleteConfirmDialog from "@/components/users/DeleteConfirmDialog";
+import UserFilters from "@/components/features/users/UserFilters";
+import UserTable from "@/components/features/users/UserTable";
+import UserFormModal from "@/components/features/users/UserFormModal";
+import DeleteConfirmDialog from "@/components/features/users/DeleteConfirmDialog";
 import { Plus } from "lucide-react";
-import { useGetCustomers, useDeleteCustomer, useUpdateCustomer } from "@/react-queries/userQueries";
+import { useGetCustomers, useDeleteCustomer, useUpdateCustomer } from "@/components/react-queries/userQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 

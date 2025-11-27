@@ -1,18 +1,18 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/app/context/authContext";
 import Loader from "@/components/Loader";
 
 const Layout = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
-
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useCreateOrder, useUpdateOrder } from "@/react-queries/orderQueries";
-import { useGetProducts } from "@/react-queries/productQueries";
+import { useCreateOrder, useUpdateOrder } from "@/components/react-queries/orderQueries";
+import { useGetProducts } from "@/components/react-queries/productQueries";
 import {
   Dialog,
   DialogContent,

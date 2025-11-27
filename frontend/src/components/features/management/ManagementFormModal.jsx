@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useCreateTenantAdmin, useUpdateTenantAdmin } from "@/react-queries/tenantAdminQueries";
+import { useCreateTenantAdmin, useUpdateTenantAdmin } from "@/components/react-queries/tenantAdminQueries";
 import {
   Dialog,
   DialogContent,

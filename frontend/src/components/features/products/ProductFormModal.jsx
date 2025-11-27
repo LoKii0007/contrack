@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useCreateProduct } from "@/react-queries/productQueries";
+import { useCreateProduct } from "@/components/react-queries/productQueries";
 import {
   Dialog,
   DialogContent,

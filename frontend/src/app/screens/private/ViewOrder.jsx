@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetOrderById } from "@/react-queries/orderQueries";
+import { useGetOrderById } from "@/components/react-queries/orderQueries";
 import { format } from "date-fns";
 import { Package, MapPin, CreditCard, FileText, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";

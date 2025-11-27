@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import OrderFilters from "@/components/orders/OrderFilters";
-import OrderTable from "@/components/orders/OrderTable";
-import DeleteConfirmDialog from "@/components/orders/DeleteConfirmDialog";
-import AddPaymentModal from "@/components/orders/AddPaymentModal";
+import OrderFilters from "@/components/features/orders/OrderFilters";
+import OrderTable from "@/components/features/orders/OrderTable";
+import DeleteConfirmDialog from "@/components/features/orders/DeleteConfirmDialog";
+import AddPaymentModal from "@/components/features/orders/AddPaymentModal";
 import { Plus } from "lucide-react";
-import { useGetOrders, useDeleteOrder } from "@/react-queries/orderQueries";
+import { useGetOrders, useDeleteOrder } from "@/components/react-queries/orderQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 

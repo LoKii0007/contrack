@@ -1,42 +1,49 @@
 import React, { useState } from "react";
-import ProductFilters from "@/components/products/ProductFilters";
-import ProductTable from "@/components/products/ProductTable";
-import ProductFormModal from "@/components/products/ProductFormModal";
-import DeleteConfirmDialog from "@/components/products/DeleteConfirmDialog";
+import ManagementFilters from "@/components/features/management/ManagementFilters";
+import ManagementTable from "@/components/features/management/ManagementTable";
+import ManagementFormModal from "@/components/features/management/ManagementFormModal";
+import DeleteConfirmDialog from "@/components/features/management/DeleteConfirmDialog";
 import { Plus } from "lucide-react";
-import { useGetProducts, useDeleteProduct } from "@/react-queries/productQueries";
+import { useGetTenantAdmins, useDeleteTenantAdmin } from "@/components/react-queries/tenantAdminQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 
-const Products = () => {
+const Management = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedTenantAdmin, setSelectedTenantAdmin] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
-    category: "all",
-    status: "all",
+    role: "all",
+    isVerified: "all",
   });
 
-  const { data: products, isLoading} = useGetProducts();
-  const { mutate: deleteProduct } = useDeleteProduct();
+  // Build query params
+  const queryParams = {
+    ...(searchQuery && { search: searchQuery }),
+    ...(filters.role !== "all" && { role: filters.role }),
+    ...(filters.isVerified !== "all" && { isVerified: filters.isVerified }),
+  };
 
-  const handleEditProduct = (product) => {
-    setSelectedProduct(product);
+  const { data: tenantAdminsData, isLoading } = useGetTenantAdmins(queryParams);
+  const { mutate: deleteTenantAdmin } = useDeleteTenantAdmin();
+
+  const handleEditTenantAdmin = (tenantAdmin) => {
+    setSelectedTenantAdmin(tenantAdmin);
     setIsEditModalOpen(true);
   };
 
-  const handleDeleteProduct = (product) => {
-    setSelectedProduct(product);
+  const handleDeleteTenantAdmin = (tenantAdmin) => {
+    setSelectedTenantAdmin(tenantAdmin);
     setIsDeleteDialogOpen(true);
   };
 
   const handleConfirmDelete = () => {
-    if (selectedProduct) {
-      deleteProduct(selectedProduct._id, {
+    if (selectedTenantAdmin) {
+      deleteTenantAdmin(selectedTenantAdmin._id, {
         onSuccess: () => {
           setIsDeleteDialogOpen(false);
-          setSelectedProduct(null);
+          setSelectedTenantAdmin(null);
         },
       });
     }
@@ -44,12 +51,10 @@ const Products = () => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    // TODO: Implement search logic or API call
   };
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    // TODO: Implement filter logic or API call
   };
 
   if (isLoading) return <Loader />;
@@ -61,46 +66,46 @@ const Products = () => {
         <div className="flex h-16 items-center justify-between px-6">
           <div className="flex-1">
             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Products
+              Management
             </h1>
             <p className="text-sm text-muted-foreground">
-              Manage your product inventory
+              Manage your tenant admins
             </p>
           </div>
-          <ProductFormModal>
+          <ManagementFormModal>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Add Product
+              Add Tenant Admin
             </Button>
-          </ProductFormModal>
+          </ManagementFormModal>
         </div>
       </header>
 
       {/* Content */}
       <div className="p-6">
         {/* Filters */}
-        <ProductFilters
+        <ManagementFilters
           searchQuery={searchQuery}
           filters={filters}
           onSearch={handleSearch}
           onFilterChange={handleFilterChange}
         />
 
-        {/* Products Table */}
-        <ProductTable
-          products={products?.data || []}
-          onEdit={handleEditProduct}
-          onDelete={handleDeleteProduct}
+        {/* Tenant Admins Table */}
+        <ManagementTable
+          tenantAdmins={tenantAdminsData?.data || []}
+          onEdit={handleEditTenantAdmin}
+          onDelete={handleDeleteTenantAdmin}
         />
       </div>
 
-      {/* Edit Product Modal */}
-      <ProductFormModal
-        product={selectedProduct}
+      {/* Edit Tenant Admin Modal */}
+      <ManagementFormModal
+        tenantAdmin={selectedTenantAdmin}
         open={isEditModalOpen}
         onOpenChange={(open) => {
           setIsEditModalOpen(open);
-          if (!open) setSelectedProduct(null);
+          if (!open) setSelectedTenantAdmin(null);
         }}
       />
 
@@ -109,13 +114,13 @@ const Products = () => {
         isOpen={isDeleteDialogOpen}
         onClose={() => {
           setIsDeleteDialogOpen(false);
-          setSelectedProduct(null);
+          setSelectedTenantAdmin(null);
         }}
         onConfirm={handleConfirmDelete}
-        productName={selectedProduct?.name}
+        tenantAdminName={selectedTenantAdmin?.name}
       />
     </div>
   );
 };
 
-export default Products;
+export default Management;

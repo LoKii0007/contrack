@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, LogIn } from "lucide-react";
-import { useLoginTenant } from "@/react-queries/authQueries";
+import { useLoginTenant } from "@/components/react-queries/authQueries";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

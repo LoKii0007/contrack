@@ -1,21 +1,21 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "./screens/private/dashboard";
+import Dashboard from "./app/screens/private/dashboard";
 import Layout from "./layouts/PrivateLayout";
-import Products from "./screens/private/Products";
+import Products from "./app/screens/private/Products";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
-import Orders from "./screens/private/Orders";
-import CreateOrder from "./screens/private/CreateOrder";
-import EditOrder from "./screens/private/EditOrder";
-import ViewOrder from "./screens/private/ViewOrder";
-import Users from "./screens/private/Users";
-import Management from "./screens/private/Management";
-import Settings from "./screens/private/Settings";
-import Login from "./screens/auth/Login";
-import Register from "./screens/auth/Register";
-import { AuthProvider } from "./context/authContext";
-import Home from "./screens/public/home";
+import Orders from "./app/screens/private/Orders";
+import CreateOrder from "./app/screens/private/CreateOrder";
+import EditOrder from "./app/screens/private/EditOrder";
+import ViewOrder from "./app/screens/private/ViewOrder";
+import Users from "./app/screens/private/Users";
+import Management from "./app/screens/private/Management";
+import Settings from "./app/screens/private/Settings";
+import Login from "./app/screens/auth/Login";
+import Register from "./app/screens/auth/Register";
+import { AuthProvider } from "./app/context/authContext";
+import Home from "./app/screens/public/home";
 
 function App() {
   const queryClient = new QueryClient();

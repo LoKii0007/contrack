@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUpdateOrder, useGetOrderById } from "@/react-queries/orderQueries";
-import { useGetProducts } from "@/react-queries/productQueries";
-import { useGetCustomers } from "@/react-queries/userQueries";
+import { useUpdateOrder, useGetOrderById } from "@/components/react-queries/orderQueries";
+import { useGetProducts } from "@/components/react-queries/productQueries";
+import { useGetCustomers } from "@/components/react-queries/userQueries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

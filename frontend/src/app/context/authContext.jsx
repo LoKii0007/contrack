@@ -8,7 +8,7 @@ import {
   getTenant,
   removeToken,
   removeTenant,
-} from "@/react-queries/authQueries";
+} from "@/components/react-queries/authQueries";
 import { toast } from "sonner";
 
 const AuthContext = createContext(undefined);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCreateOrder } from "@/react-queries/orderQueries";
-import { useGetProducts } from "@/react-queries/productQueries";
-import { useGetCustomers } from "@/react-queries/userQueries";
+import { useCreateOrder } from "@/components/react-queries/orderQueries";
+import { useGetProducts } from "@/components/react-queries/productQueries";
+import { useGetCustomers } from "@/components/react-queries/userQueries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -277,9 +277,9 @@ const CreateOrder = () => {
     if (!formData.total || parseFloat(formData.total) <= 0) {
       newErrors.total = "Valid total is required";
     }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    }
+    // if (!formData.email.trim()) {
+    //   newErrors.email = "Email is required";
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAddPayment } from "@/react-queries/orderQueries";
+import { useAddPayment } from "@/components/react-queries/orderQueries";
 import {
   Dialog,
   DialogContent,

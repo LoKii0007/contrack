@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, LogIn, User, Phone } from "lucide-react";
-import { useRegisterTenant } from "@/react-queries/authQueries";
+import { useRegisterTenant } from "@/components/react-queries/authQueries";
 
 export default function Register() {
   const [name, setName] = useState("");
