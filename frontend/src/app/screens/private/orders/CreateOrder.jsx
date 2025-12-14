@@ -39,7 +39,7 @@ const CreateOrder = () => {
   const { mutate: createOrder, isPending: isCreating } = useCreateOrder();
   const { data: productsData, isLoading: isLoadingProducts } = useGetProducts();
   const { data: usersData, isLoading: isLoadingUsers } = useGetCustomers({
-    limit: 1000,
+    limit: 100,
   });
   const products = productsData?.data || [];
   const users = usersData?.data || [];
@@ -432,7 +432,7 @@ const CreateOrder = () => {
                           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-full p-0" align="start">
+                      <PopoverContent className="w-full max-w-none p-0" align="start">
                         <Command>
                           <CommandInput placeholder="Search customers..." />
                           <CommandList>
@@ -529,7 +529,7 @@ const CreateOrder = () => {
                     <SelectContent>
                       {products.map((product) => (
                         <SelectItem key={product._id} value={product._id}>
-                          {product.name} - ₹{product.price?.toFixed(2)}
+                          {product.name} {product?.brand ? `- ${product.brand}` : ""}
                         </SelectItem>
                       ))}
                     </SelectContent>

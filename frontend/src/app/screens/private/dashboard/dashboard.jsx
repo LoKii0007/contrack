@@ -1,24 +1,14 @@
 import React from "react";
+import PageLayout from "@/layouts/PageLayout";
 
 const Dashboard = () => {
   return (
-    <div className="h-full">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="flex h-16 items-center px-6">
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Dashboard
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Welcome back! Here's your overview
-            </p>
-          </div>
-        </div>
-      </header>
-
+    <PageLayout
+      heading="Dashboard"
+      description="Welcome back! Here's your overview"
+    >
       {/* Content */}
-      <div className="p-6">
+      <div className="flex-1 w-full h-full">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {/* Stat Cards Placeholder */}
           {[
@@ -56,7 +46,7 @@ const Dashboard = () => {
           </p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

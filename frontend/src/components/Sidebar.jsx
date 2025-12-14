@@ -9,7 +9,11 @@ import {
   LogOut,
   Store,
   UserStarIcon,
+  PackageCheck,
+  Truck,
+  ArrowRightFromLine,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const sidebarItems = [
@@ -22,6 +26,16 @@ const sidebarItems = [
     name: "Products",
     icon: Package,
     path: "/products",
+  },
+  {
+    name : 'Stock',
+    icon: PackageCheck,
+    path: "/stock",
+  },
+  {
+    name: "Suppliers",
+    icon: Truck,
+    path: "/suppliers",
   },
   {
     name: "Orders",
@@ -52,10 +66,10 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="flex h-full flex-col border-r border-sidebar-border bg-sidebar">
+    <div className="flex h-full flex-col bg-sidebar">
       {/* Logo/Brand Section */}
-      <div className="flex h-16 items-center border-b border-sidebar-border px-6">
-        <div className="flex items-center gap-2">
+      <div className="flex h-16 items-center justify-between">
+        <div className="flex items-center gap-2 px-6">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <Store className="h-5 w-5 text-primary-foreground" />
           </div>
@@ -63,6 +77,11 @@ const Sidebar = () => {
             ConTrack
           </span>
         </div>
+        <Button variant="outline" size="icon" className="rotate-180 mx-1">
+          <ArrowRightFromLine
+            className="h-5 w-5"
+          />
+        </Button>
       </div>
 
       {/* Navigation Items */}

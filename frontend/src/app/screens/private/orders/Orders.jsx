@@ -8,6 +8,7 @@ import { Plus } from "lucide-react";
 import { useGetOrders, useDeleteOrder } from "@/components/react-queries/orderQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import PageLayout from "@/layouts/PageLayout";
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -76,34 +77,30 @@ const Orders = () => {
   };
 
   return (
-    <div className="h-full max-h-screen overflow-y-auto">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Orders
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Manage customer orders and track payments
-            </p>
-          </div>
-          <Button onClick={() => navigate("/orders/new")}>
-            <Plus className="h-4 w-4 mr-2" />
-            Create Order
-          </Button>
-        </div>
-      </header>
-
+    <PageLayout
+      heading="Orders"
+      description="Manage customer orders and track payments"
+    >
       {/* Content */}
-      <div className="p-6">
-        {/* Filters */}
-        <OrderFilters
-          searchQuery={searchQuery}
-          filters={filters}
-          onSearch={handleSearch}
-          onFilterChange={handleFilterChange}
-        />
+      <div className="flex-1 w-full h-full space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Filters */}
+          <OrderFilters
+            searchQuery={searchQuery}
+            filters={filters}
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+          />
+
+          <div className="flex justify-end">
+            <Button onClick={() => navigate("/orders/new")}>
+              <Plus className="h-4 w-4 mr-2" />
+              Create Order
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6 h-full">
 
         {/* Orders Table */}
         {isLoading ? (
@@ -117,6 +114,7 @@ const Orders = () => {
             onAddPayment={handleAddPayment}
           />
         )}
+        </div>
       </div>
 
       {/* Delete Dialog */}
@@ -139,7 +137,7 @@ const Orders = () => {
           setSelectedOrder(null);
         }}
       />
-    </div>
+    </PageLayout>
   );
 };
 

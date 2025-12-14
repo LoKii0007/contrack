@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { useGetTenantAdmins, useDeleteTenantAdmin } from "@/components/react-queries/tenantAdminQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import PageLayout from "@/layouts/PageLayout";
 
 const Management = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -60,36 +61,32 @@ const Management = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="h-full">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Management
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Manage your tenant admins
-            </p>
-          </div>
-          <ManagementFormModal>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add Tenant Admin
-            </Button>
-          </ManagementFormModal>
-        </div>
-      </header>
-
+    <PageLayout
+      heading="Management"
+      description="Manage your tenant admins"
+    >
       {/* Content */}
-      <div className="p-6">
-        {/* Filters */}
-        <ManagementFilters
-          searchQuery={searchQuery}
-          filters={filters}
-          onSearch={handleSearch}
-          onFilterChange={handleFilterChange}
-        />
+      <div className="flex-1 w-full h-full space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Filters */}
+          <ManagementFilters
+            searchQuery={searchQuery}
+            filters={filters}
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+          />
+
+          <div className="flex justify-end">
+            <ManagementFormModal>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                Add Tenant Admin
+              </Button>
+            </ManagementFormModal>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6 h-full">
 
         {/* Tenant Admins Table */}
         <ManagementTable
@@ -97,6 +94,7 @@ const Management = () => {
           onEdit={handleEditTenantAdmin}
           onDelete={handleDeleteTenantAdmin}
         />
+        </div>
       </div>
 
       {/* Edit Tenant Admin Modal */}
@@ -119,7 +117,7 @@ const Management = () => {
         onConfirm={handleConfirmDelete}
         tenantAdminName={selectedTenantAdmin?.name}
       />
-    </div>
+    </PageLayout>
   );
 };
 

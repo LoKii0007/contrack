@@ -59,10 +59,10 @@ const ProductFilters = ({ searchQuery, filters, onSearch, onFilterChange }) => {
   };
 
   return (
-    <div className="mb-6 rounded-xl border border-border bg-card p-4 shadow-sm">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="rounded-xl bg-card p-0">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between flex-wrap">
         {/* Search Bar */}
-        <div className="relative flex-1 max-w-md">
+        <div className="relative flex-1 min-w-[300px]">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="text"
@@ -75,10 +75,6 @@ const ProductFilters = ({ searchQuery, filters, onSearch, onFilterChange }) => {
 
         {/* Filters */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Filter className="h-4 w-4" />
-            <span className="hidden sm:inline">Filters:</span>
-          </div>
 
           {/* Category Filter */}
           <DropdownMenu>

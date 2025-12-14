@@ -4,9 +4,13 @@ import ProductTable from "@/components/features/products/ProductTable";
 import ProductFormModal from "@/components/features/products/ProductFormModal";
 import DeleteConfirmDialog from "@/components/features/products/DeleteConfirmDialog";
 import { Plus } from "lucide-react";
-import { useGetProducts, useDeleteProduct } from "@/components/react-queries/productQueries";
+import {
+  useGetProducts,
+  useDeleteProduct,
+} from "@/components/react-queries/productQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import PageLayout from "@/layouts/PageLayout";
 
 const Products = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -18,7 +22,7 @@ const Products = () => {
     status: "all",
   });
 
-  const { data: products, isLoading} = useGetProducts();
+  const { data: products, isLoading } = useGetProducts();
   const { mutate: deleteProduct } = useDeleteProduct();
 
   const handleEditProduct = (product) => {
@@ -44,57 +48,47 @@ const Products = () => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    // TODO: Implement search logic or API call
   };
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    // TODO: Implement filter logic or API call
   };
 
   if (isLoading) return <Loader />;
 
   return (
-    <div className="h-full">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Products
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Manage your product inventory
-            </p>
-          </div>
-          <ProductFormModal>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add Product
-            </Button>
-          </ProductFormModal>
-        </div>
-      </header>
-
+    <PageLayout heading="Products" description="Manage your product inventory">
       {/* Content */}
-      <div className="p-6">
-        {/* Filters */}
-        <ProductFilters
-          searchQuery={searchQuery}
-          filters={filters}
-          onSearch={handleSearch}
-          onFilterChange={handleFilterChange}
-        />
+      <div className="flex-1 w-full h-full space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Filters */}
+          <ProductFilters
+            searchQuery={searchQuery}
+            filters={filters}
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+          />
 
-        {/* Products Table */}
-        <ProductTable
-          products={products?.data || []}
-          onEdit={handleEditProduct}
-          onDelete={handleDeleteProduct}
-        />
+          <div className="flex justify-end">
+            <ProductFormModal>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                Add Product
+              </Button>
+            </ProductFormModal>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6 h-full">
+          <ProductTable
+            products={products?.data || []}
+            onEdit={handleEditProduct}
+            onDelete={handleDeleteProduct}
+          />
+        </div>
       </div>
 
-      {/* Edit Product Modal */}
+      {/* Modals remain unchanged */}
       <ProductFormModal
         product={selectedProduct}
         open={isEditModalOpen}
@@ -104,7 +98,6 @@ const Products = () => {
         }}
       />
 
-      {/* Delete Dialog */}
       <DeleteConfirmDialog
         isOpen={isDeleteDialogOpen}
         onClose={() => {
@@ -114,7 +107,7 @@ const Products = () => {
         onConfirm={handleConfirmDelete}
         productName={selectedProduct?.name}
       />
-    </div>
+    </PageLayout>
   );
 };
 

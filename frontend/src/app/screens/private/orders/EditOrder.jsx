@@ -39,7 +39,7 @@ const EditOrder = () => {
   const { mutate: updateOrder, isPending: isUpdating } = useUpdateOrder();
   const { data: orderData, isLoading: isLoadingOrder } = useGetOrderById(id);
   const { data: productsData, isLoading: isLoadingProducts } = useGetProducts();
-  const { data: usersData, isLoading: isLoadingUsers } = useGetCustomers({ limit: 1000 });
+  const { data: usersData, isLoading: isLoadingUsers } = useGetCustomers({ limit: 100 });
   const products = productsData?.data || [];
   const users = usersData?.data || [];
   const order = orderData?.data;
@@ -86,7 +86,7 @@ const EditOrder = () => {
       }));
 
       setFormData({
-        customer: order.user?._id || order.user || "",
+        customer: order.customer?._id || order.customer || "",
         products: order.products || [],
         total: order.total || 0,
         description: order.description || "",
@@ -97,8 +97,8 @@ const EditOrder = () => {
           state: "",
           postalCode: "",
         },
-        phone: order.phone || "",
-        email: order.email || "",
+        phone: order.customer?.phone || "",
+        email: order.customer?.email || "",
         hasInvoice: order.hasInvoice || false,
         paymentMethod: order.paymentMethod || "cash",
         orderStatus: order.orderStatus || "pending",
@@ -453,7 +453,7 @@ const EditOrder = () => {
                       </div>
                     </div>
                 ) : (
-                  <Popover open={openUserCombobox} onOpenChange={setOpenUserCombobox}>
+                  <Popover open={openUserCombobox} onOpenChange={setOpenUserCombobox}  >
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"

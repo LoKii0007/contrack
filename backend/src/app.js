@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const router = require("./api/v1/routes/index");
+require("dotenv").config();
 
 const app = express();
 
@@ -8,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
   })
 );

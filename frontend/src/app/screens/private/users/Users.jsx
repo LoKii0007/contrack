@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { useGetCustomers, useDeleteCustomer, useUpdateCustomer } from "@/components/react-queries/userQueries";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
+import PageLayout from "@/layouts/PageLayout";
 
 const Users = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -58,36 +59,32 @@ const Users = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="h-full">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Users
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Manage your users
-            </p>
-          </div>
-          <UserFormModal>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add User
-            </Button>
-          </UserFormModal>
-        </div>
-      </header>
-
+    <PageLayout
+      heading="Users"
+      description="Manage your users"
+    >
       {/* Content */}
-      <div className="p-6">
-        {/* Filters */}
-        <UserFilters
-          searchQuery={searchQuery}
-          filters={filters}
-          onSearch={handleSearch}
-          onFilterChange={handleFilterChange}
-        />
+      <div className="flex-1 w-full h-full space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Filters */}
+          <UserFilters
+            searchQuery={searchQuery}
+            filters={filters}
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+          />
+
+          <div className="flex justify-end">
+            <UserFormModal>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                Add User
+              </Button>
+            </UserFormModal>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6 h-full">
 
         {/* Users Table */}
         <UserTable
@@ -95,6 +92,7 @@ const Users = () => {
           onEdit={handleEditUser}
           onDelete={handleDeleteUser}
         />
+        </div>
       </div>
 
       {/* Edit User Modal */}
@@ -117,7 +115,7 @@ const Users = () => {
         onConfirm={handleConfirmDelete}
         userName={selectedUser?.name}
       />
-    </div>
+    </PageLayout>
   );
 };
 
